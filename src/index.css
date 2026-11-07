@@ -1196,6 +1196,111 @@ a {
   line-height: 1.5;
 }
 
+.languages-section {
+  position: relative;
+}
+
+.languages-intro {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(48px, 9vw, 110px);
+  align-items: end;
+  margin-bottom: 52px;
+}
+
+.languages-intro h3 {
+  margin: 0;
+  color: var(--bright-white);
+  font-size: clamp(2.8rem, 6vw, 5.4rem);
+  font-weight: 500;
+  line-height: .95;
+  letter-spacing: -.065em;
+}
+
+.languages-intro p {
+  max-width: 510px;
+  margin: 0;
+  color: var(--gray);
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.language-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--line);
+}
+
+.language-card {
+  min-height: 190px;
+  background: var(--surface);
+  padding: 28px;
+  transition: background 180ms ease;
+}
+
+.language-card:hover {
+  background: var(--surface-raised);
+}
+
+.language-card-top {
+  display: grid;
+  grid-template-columns: 36px 1fr;
+  gap: 18px;
+  align-items: start;
+}
+
+.language-card-top > span {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border: 1px solid #333;
+  border-radius: 50%;
+  color: var(--gray);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 9px;
+}
+
+.language-card h3 {
+  margin: 0;
+  color: var(--bright-white);
+  font-size: 21px;
+  font-weight: 500;
+  letter-spacing: -.035em;
+}
+
+.language-card p {
+  margin: 7px 0 0;
+  color: var(--gray-dim);
+  font-size: 11px;
+}
+
+.language-meter {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 5px;
+  margin-top: 56px;
+}
+
+.language-meter span {
+  height: 2px;
+  background: #262626;
+  transition: background 220ms ease, box-shadow 220ms ease;
+}
+
+.language-meter span.is-filled {
+  background: #bdbdbd;
+}
+
+.language-card:hover .language-meter span.is-filled {
+  background: var(--bright-white);
+  box-shadow: 0 0 10px rgba(255,255,255,.25);
+}
+
 .contact-section {
   position: relative;
   overflow: hidden;
@@ -1317,6 +1422,8 @@ a {
   .about-lower-grid { grid-template-columns: 1fr; }
   .courses-intro { grid-template-columns: 1fr; }
   .course-grid { grid-template-columns: repeat(2, 1fr); }
+  .languages-intro { grid-template-columns: 1fr; }
+  .language-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 620px) {
@@ -1353,6 +1460,9 @@ a {
   .course-grid { grid-template-columns: 1fr; }
   .course-card { min-height: 205px; padding: 24px 22px; }
   .course-detail { right: 22px; bottom: 22px; left: 22px; }
+  .language-grid { grid-template-columns: 1fr; }
+  .language-card { min-height: 168px; padding: 24px 22px; }
+  .language-meter { margin-top: 40px; }
   .contact-inner { padding-block: 94px; }
   .email-link { gap: 8px; }
   .footer-inner { align-items: flex-start; flex-direction: column; justify-content: center; gap: 8px; }

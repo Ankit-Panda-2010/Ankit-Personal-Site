@@ -25,21 +25,21 @@ const projects = [
   },
   {
     index: '02',
+    title: 'CORA',
+    role: 'Cosmic Observation Research Archive',
+    period: 'October 2025',
+    description:
+      'Built an application that filters publications for useful information for researchers, students, professors, and subject-matter experts.',
+    stack: ['Research Tool', 'Publication Filtering', 'Information Access'],
+  },
+  {
+    index: '03',
     title: 'FRC Scouting Platform',
     role: 'Developer · YETI Robotics 3506',
     period: '2024 — 2026',
     description:
       'Helped a competitive robotics team develop its scouting platform using a modern full-stack web stack.',
     stack: ['Next.js', 'Tailwind CSS', 'PostgreSQL'],
-  },
-  {
-    index: '03',
-    title: 'studiio.xyz',
-    role: 'Web Development Intern',
-    period: '2025',
-    description:
-      'Worked on frontend architecture and maintained full-stack infrastructure for a student development hub.',
-    stack: ['Next.js', 'Web Infrastructure', 'DevOps'],
   },
 ]
 
@@ -131,6 +131,14 @@ const coursework = [
     track: 'IB',
     title: 'IB Theory of Knowledge',
   },
+]
+
+const languages = [
+  { code: 'EN', language: 'English', proficiency: 'Native or bilingual', level: 5 },
+  { code: 'OR', language: 'Oriya', proficiency: 'Native or bilingual', level: 5 },
+  { code: 'FR', language: 'French', proficiency: 'Limited working', level: 2 },
+  { code: 'HI', language: 'Hindi', proficiency: 'Limited working', level: 2 },
+  { code: 'ES', language: 'Spanish', proficiency: 'Elementary', level: 1 },
 ]
 
 const scienceOlympiadAwards = [
@@ -329,11 +337,11 @@ export default function App() {
           </a>
 
           <nav className="desktop-nav" aria-label="Primary navigation">
-            <a href="#work">Work</a>
-            <a href="#experience">Experience</a>
-            <a href="#awards">Awards</a>
-            <a href="#courses">Courses</a>
             <a href="#about">About</a>
+            <a href="#work">Work</a>
+            <a href="#courses">Courses</a>
+            <a href="#awards">Awards</a>
+            <a href="#languages">Languages</a>
           </nav>
 
           <a className="header-contact" href="mailto:ankitpanda2010@gmail.com">
@@ -404,12 +412,76 @@ export default function App() {
           <div className="hero-footnote">
             <span>Scroll to explore</span>
             <span className="hero-line" />
-            <span>01 — 07</span>
+            <span>01 — 08</span>
+          </div>
+        </section>
+
+        <section id="about" className="section container" data-reveal>
+          <SectionHeading number="01" title="About" />
+          <div className="about-grid">
+            <div className="about-statement">
+              <p>
+                I’m Ankit — a 16-year-old IB student, developer, and aspiring quant.
+              </p>
+            </div>
+            <div className="about-details">
+              <p>
+                I’m most interested in the space where software, mathematics, and finance overlap. I spend my time building products, studying analytical problems, competing in STEM, and leading organizations at my school.
+              </p>
+              <p>
+                Beyond my own projects, I care about making STEM more accessible through coaching, mentorship, community outreach, and helping other students get excited about technical subjects.
+              </p>
+            </div>
+          </div>
+
+          <div className="profile-facts" data-reveal>
+            <div><span>Age</span><strong>16</strong></div>
+            <div><span>Program</span><strong>IB Diploma</strong></div>
+            <div><span>Graduation</span><strong>2028</strong></div>
+            <div><span>Based in</span><strong><MapPin size={14} /> Charlotte, NC</strong></div>
+          </div>
+
+          <div className="about-lower-grid">
+            <div className="interest-panel" data-reveal>
+              <p className="panel-label">What I’m interested in</p>
+              <div className="interest-list">
+                {interests.map((interest, index) => (
+                  <div key={interest}>
+                    <span>0{index + 1}</span>
+                    <p>{interest}</p>
+                  </div>
+                ))}
+              </div>
+              <div className="skills">
+                {skills.map((skill) => <span key={skill}>{skill}</span>)}
+              </div>
+            </div>
+
+            <div className="online-panel" data-reveal>
+              <p className="panel-label">Find me online</p>
+              <div className="online-links">
+                <a href="https://github.com/Ankit-Panda-2010" target="_blank" rel="noreferrer">
+                  <span className="online-icon"><Code2 size={18} strokeWidth={1.5} /></span>
+                  <span><strong>GitHub</strong><small>@Ankit-Panda-2010</small></span>
+                  <ArrowUpRight size={17} strokeWidth={1.4} />
+                </a>
+                <a href="https://www.linkedin.com/in/ankit-panda-195ab22a7" target="_blank" rel="noreferrer">
+                  <span className="online-icon"><BriefcaseBusiness size={18} strokeWidth={1.5} /></span>
+                  <span><strong>LinkedIn</strong><small>Professional profile</small></span>
+                  <ArrowUpRight size={17} strokeWidth={1.4} />
+                </a>
+                <a href="mailto:ankitpanda2010@gmail.com">
+                  <span className="online-icon"><Mail size={18} strokeWidth={1.5} /></span>
+                  <span><strong>Email</strong><small>ankitpanda2010@gmail.com</small></span>
+                  <ArrowUpRight size={17} strokeWidth={1.4} />
+                </a>
+              </div>
+            </div>
           </div>
         </section>
 
         <section id="work" className="section container" data-reveal>
-          <SectionHeading number="01" title="Selected work" />
+          <SectionHeading number="02" title="Selected work" />
           <div className="project-list">
             {projects.map((project) => (
               <article className="project-row" key={project.title}>
@@ -432,7 +504,7 @@ export default function App() {
         </section>
 
         <section id="experience" className="section container" data-reveal>
-          <SectionHeading number="02" title="Experience" />
+          <SectionHeading number="03" title="Experience" />
           <div className="experience-grid">
             <article className="experience-card" data-reveal>
               <div className="experience-icon"><BriefcaseBusiness size={18} strokeWidth={1.5} /></div>
@@ -458,8 +530,34 @@ export default function App() {
           </div>
         </section>
 
+        <section id="courses" className="section container courses-section" data-reveal>
+          <SectionHeading number="04" title="Coursework & learning" />
+          <div className="courses-intro">
+            <h3>What I’m studying.</h3>
+            <div>
+              <p>
+                A rigorous mix of mathematics, computer science, business, history, languages, literature, and physics at North Mecklenburg High School.
+              </p>
+              <div className="course-counts">
+                <span><strong>04</strong> AP courses</span>
+                <span><strong>07</strong> IB courses</span>
+              </div>
+            </div>
+          </div>
+          <div className="course-grid">
+            {coursework.map((course, index) => (
+              <article className="course-card" key={course.title} data-reveal>
+                <span className="course-index">{String(index + 1).padStart(2, '0')}</span>
+                <p>{course.track} course</p>
+                <h3>{course.title}</h3>
+                <span className="course-detail">North Mecklenburg High School</span>
+              </article>
+            ))}
+          </div>
+        </section>
+
         <section className="section container" aria-labelledby="leadership-heading" data-reveal>
-          <SectionHeading number="03" title="Leadership" id="leadership-heading" />
+          <SectionHeading number="05" title="Leadership" id="leadership-heading" />
           <div className="leadership-list">
             {leadership.map((item, index) => (
               <article className="leadership-row" key={item.organization} data-reveal>
@@ -475,7 +573,7 @@ export default function App() {
         </section>
 
         <section id="awards" className="section container awards-section" data-reveal>
-          <SectionHeading number="04" title="Awards" />
+          <SectionHeading number="06" title="Awards" />
 
           <div className="awards-intro">
             <div className="awards-total">
@@ -547,91 +645,29 @@ export default function App() {
           </div>
         </section>
 
-        <section id="about" className="section container" data-reveal>
-          <SectionHeading number="05" title="About" />
-          <div className="about-grid">
-            <div className="about-statement">
-              <p>
-                I’m Ankit — a 16-year-old IB student, developer, and aspiring quant.
-              </p>
-            </div>
-            <div className="about-details">
-              <p>
-                I’m most interested in the space where software, mathematics, and finance overlap. I spend my time building products, studying analytical problems, competing in STEM, and leading organizations at my school.
-              </p>
-              <p>
-                Beyond my own projects, I care about making STEM more accessible through coaching, mentorship, community outreach, and helping other students get excited about technical subjects.
-              </p>
-            </div>
+        <section id="languages" className="section container languages-section" data-reveal>
+          <SectionHeading number="07" title="Languages" />
+          <div className="languages-intro">
+            <h3>Five languages.<br />Different levels.</h3>
+            <p>
+              A multilingual background spanning native fluency, working proficiency, and continued language study.
+            </p>
           </div>
-
-          <div className="profile-facts" data-reveal>
-            <div><span>Age</span><strong>16</strong></div>
-            <div><span>Program</span><strong>IB Diploma</strong></div>
-            <div><span>Graduation</span><strong>2028</strong></div>
-            <div><span>Based in</span><strong><MapPin size={14} /> Charlotte, NC</strong></div>
-          </div>
-
-          <div className="about-lower-grid">
-            <div className="interest-panel" data-reveal>
-              <p className="panel-label">What I’m interested in</p>
-              <div className="interest-list">
-                {interests.map((interest, index) => (
-                  <div key={interest}>
-                    <span>0{index + 1}</span>
-                    <p>{interest}</p>
+          <div className="language-grid">
+            {languages.map((item) => (
+              <article className="language-card" key={item.language} data-reveal>
+                <div className="language-card-top">
+                  <span>{item.code}</span>
+                  <div>
+                    <h3>{item.language}</h3>
+                    <p>{item.proficiency}</p>
                   </div>
-                ))}
-              </div>
-              <div className="skills">
-                {skills.map((skill) => <span key={skill}>{skill}</span>)}
-              </div>
-            </div>
-
-            <div className="online-panel" data-reveal>
-              <p className="panel-label">Find me online</p>
-              <div className="online-links">
-                <a href="https://github.com/Ankit-Panda-2010" target="_blank" rel="noreferrer">
-                  <span className="online-icon"><Code2 size={18} strokeWidth={1.5} /></span>
-                  <span><strong>GitHub</strong><small>@Ankit-Panda-2010</small></span>
-                  <ArrowUpRight size={17} strokeWidth={1.4} />
-                </a>
-                <a href="https://www.linkedin.com/in/ankit-panda-195ab22a7" target="_blank" rel="noreferrer">
-                  <span className="online-icon"><BriefcaseBusiness size={18} strokeWidth={1.5} /></span>
-                  <span><strong>LinkedIn</strong><small>Professional profile</small></span>
-                  <ArrowUpRight size={17} strokeWidth={1.4} />
-                </a>
-                <a href="mailto:ankitpanda2010@gmail.com">
-                  <span className="online-icon"><Mail size={18} strokeWidth={1.5} /></span>
-                  <span><strong>Email</strong><small>ankitpanda2010@gmail.com</small></span>
-                  <ArrowUpRight size={17} strokeWidth={1.4} />
-                </a>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section id="courses" className="section container courses-section" data-reveal>
-          <SectionHeading number="06" title="Coursework & learning" />
-          <div className="courses-intro">
-            <h3>What I’m studying.</h3>
-            <div>
-              <p>
-                A rigorous mix of mathematics, computer science, business, history, languages, literature, and physics at North Mecklenburg High School.
-              </p>
-              <div className="course-counts">
-                <span><strong>04</strong> AP courses</span>
-                <span><strong>07</strong> IB courses</span>
-              </div>
-            </div>
-          </div>
-          <div className="course-grid">
-            {coursework.map((course, index) => (
-              <article className="course-card" key={course.title} data-reveal>
-                <span className="course-index">{String(index + 1).padStart(2, '0')}</span>
-                <p>{course.track} course</p>
-                <h3>{course.title}</h3>
-                <span className="course-detail">North Mecklenburg High School</span>
+                </div>
+                <div className="language-meter" aria-label={`${item.proficiency} proficiency`}>
+                  {Array.from({ length: 5 }).map((_, index) => (
+                    <span className={index < item.level ? 'is-filled' : ''} key={index} />
+                  ))}
+                </div>
               </article>
             ))}
           </div>
@@ -640,7 +676,7 @@ export default function App() {
         <section id="contact" className="contact-section">
           <div className="contact-glow" aria-hidden="true" />
           <div className="container contact-inner" data-reveal>
-            <p className="kicker">07 · Contact</p>
+            <p className="kicker">08 · Contact</p>
             <h2>Let’s connect.</h2>
             <p className="contact-copy">
               I’m always interested in thoughtful conversations about software, quantitative finance, STEM, and new opportunities.
