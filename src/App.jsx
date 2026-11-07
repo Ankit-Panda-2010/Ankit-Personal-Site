@@ -122,8 +122,10 @@ const skills = [
 
 const interests = [
   'Software Engineering',
+  'Economics & Markets',
   'Quantitative Finance',
   'Applied Mathematics',
+  'Data Analysis',
   'FinTech',
   'Robotics & Autonomous Systems',
   'STEM Education',
@@ -322,6 +324,52 @@ const totalPlacements = scienceOlympiadAwards.reduce(
   0,
 )
 
+const decaAwards = [
+  {
+    result: '8th',
+    title: 'North Carolina Career Development Conference Glass',
+    category: 'Business Finance Series',
+    date: 'February 2026',
+    detail: 'Placed eighth statewide and qualified for ICDC as one of North Carolina’s eight qualifiers in the event.',
+  },
+  {
+    result: 'Top 10',
+    title: 'North Carolina Career Development Conference Finalist',
+    category: 'Business Finance Series',
+    date: 'February 2026',
+    detail: 'Earned a top-ten overall combined score across the test and role-play portions of the event.',
+  },
+  {
+    result: 'Medal',
+    title: 'North Carolina Career Development Conference Test Medal',
+    category: 'Business Finance Series',
+    date: 'February 2026',
+    detail: 'Received a test medal for performance on the Business Finance Series examination.',
+  },
+]
+
+const additionalRecognition = [
+  {
+    title: 'AP Scholar Award',
+    issuer: 'College Board',
+    date: 'July 2026',
+  },
+  {
+    title: 'AP National Recognition Award',
+    issuer: 'College Board',
+    date: 'June 2026',
+  },
+  {
+    title: 'Global Nominee for the NASA Space Apps Challenge',
+    issuer: 'NASA Space Apps',
+    date: 'November 2025',
+  },
+  {
+    title: 'Presidential Award for Educational Achievement',
+    issuer: 'Academic recognition',
+  },
+]
+
 export default function App() {
   useEffect(() => {
     document.documentElement.classList.add('motion-ready')
@@ -408,7 +456,7 @@ export default function App() {
               Panda<span className="cursor">_</span>
             </h1>
             <p className="hero-summary">
-              I build software, study applied mathematics, and explore the intersection of technology and finance.
+              I combine economics, software, and data analysis to build practical tools that solve real problems.
             </p>
 
             <div className="hero-actions">
@@ -486,7 +534,7 @@ export default function App() {
 
           <div className="about-lower-grid">
             <div className="interest-panel" data-reveal>
-              <p className="panel-label">What I’m interested in</p>
+              <p className="panel-label">Interests & hobbies</p>
               <div className="interest-list">
                 {interests.map((interest, index) => (
                   <div key={interest}>
@@ -494,6 +542,14 @@ export default function App() {
                     <p>{interest}</p>
                   </div>
                 ))}
+              </div>
+              <div className="football-card">
+                <span className="football-mark">MU</span>
+                <div>
+                  <p>Football</p>
+                  <strong>Big Manchester United fan</strong>
+                </div>
+                <span className="football-code">MUFC</span>
               </div>
               <div className="skills">
                 {skills.map((skill) => <span key={skill}>{skill}</span>)}
@@ -636,6 +692,14 @@ export default function App() {
         <section id="awards" className="section container awards-section" data-reveal>
           <SectionHeading number="06" title="Awards" />
 
+          <div className="award-category-heading" data-reveal>
+            <span>01</span>
+            <div>
+              <p>Science Olympiad</p>
+              <h3>Four seasons of competition</h3>
+            </div>
+          </div>
+
           <div className="awards-intro">
             <div className="awards-total">
               <span>{totalPlacements}</span>
@@ -688,14 +752,48 @@ export default function App() {
             })}
           </div>
 
+          <div className="award-category-heading award-category-spaced" data-reveal>
+            <span>02</span>
+            <div>
+              <p>DECA</p>
+              <h3>Business Finance Series · North Carolina</h3>
+            </div>
+          </div>
+
+          <div className="deca-awards-grid">
+            {decaAwards.map((item) => (
+              <article className="deca-award-card" key={item.title} data-reveal>
+                <div className="deca-result">{item.result}</div>
+                <div>
+                  <p>{item.date} · DECA</p>
+                  <h3>{item.title}</h3>
+                  <span>{item.category}</span>
+                </div>
+                <p className="deca-detail">{item.detail}</p>
+              </article>
+            ))}
+          </div>
+
+          <div className="award-category-heading award-category-spaced" data-reveal>
+            <span>03</span>
+            <div>
+              <p>Academic & other</p>
+              <h3>Recognition beyond competition</h3>
+            </div>
+          </div>
+
           <div className="recognition-grid" data-reveal>
-            <article className="recognition-feature">
-              <div className="recognition-icon"><Trophy size={20} strokeWidth={1.4} /></div>
-              <div>
-                <p>Additional recognition</p>
-                <h3>Presidential Award for Educational Achievement</h3>
-              </div>
-            </article>
+            {additionalRecognition.map((item, index) => (
+              <article className="recognition-feature" key={item.title}>
+                <div className="recognition-icon">
+                  {index === 0 ? <Trophy size={20} strokeWidth={1.4} /> : <Award size={20} strokeWidth={1.4} />}
+                </div>
+                <div>
+                  <p>{item.issuer}{item.date ? ` · ${item.date}` : ''}</p>
+                  <h3>{item.title}</h3>
+                </div>
+              </article>
+            ))}
             <article className="recognition-secondary">
               <div className="recognition-icon"><Award size={20} strokeWidth={1.4} /></div>
               <div>

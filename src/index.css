@@ -654,6 +654,41 @@ a {
   position: relative;
 }
 
+.award-category-heading {
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  gap: 18px;
+  align-items: start;
+  border-top: 1px solid var(--line);
+  padding-top: 24px;
+  margin-bottom: 52px;
+}
+
+.award-category-heading > span,
+.award-category-heading p {
+  color: var(--gray-dim);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+}
+
+.award-category-heading p {
+  margin: 0;
+}
+
+.award-category-heading h3 {
+  margin: 9px 0 0;
+  color: var(--bright-white);
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  font-weight: 500;
+  letter-spacing: -.045em;
+}
+
+.award-category-spaced {
+  margin-top: 110px;
+}
+
 .awards-intro {
   display: grid;
   grid-template-columns: 1.05fr .95fr;
@@ -697,6 +732,78 @@ a {
 
 .award-seasons {
   border-top: 1px solid var(--line);
+}
+
+.deca-awards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--line);
+}
+
+.deca-award-card {
+  display: flex;
+  min-height: 360px;
+  flex-direction: column;
+  background: var(--surface);
+  padding: 28px;
+  transition: background 180ms ease;
+}
+
+.deca-award-card:hover {
+  background: var(--surface-raised);
+}
+
+.deca-result {
+  display: grid;
+  width: 62px;
+  height: 62px;
+  place-items: center;
+  border: 1px solid #444;
+  border-radius: 50%;
+  color: var(--bright-white);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 11px;
+  box-shadow: 0 0 28px rgba(255,255,255,.045);
+}
+
+.deca-award-card > div:nth-child(2) {
+  margin-top: 38px;
+}
+
+.deca-award-card > div:nth-child(2) > p,
+.deca-award-card > div:nth-child(2) > span {
+  color: var(--gray-dim);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 9px;
+  line-height: 1.5;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+
+.deca-award-card > div:nth-child(2) > p {
+  margin: 0;
+}
+
+.deca-award-card h3 {
+  margin: 12px 0 9px;
+  color: var(--bright-white);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -.03em;
+}
+
+.deca-detail {
+  margin: auto 0 0;
+  border-top: 1px solid var(--line-soft);
+  padding-top: 20px;
+  color: var(--gray);
+  font-size: 12px;
+  line-height: 1.7;
 }
 
 .award-season {
@@ -1009,6 +1116,62 @@ a {
   margin: 0;
   color: #b9b9b9;
   font-size: 13px;
+}
+
+.football-card {
+  display: grid;
+  grid-template-columns: 42px 1fr auto;
+  gap: 14px;
+  align-items: center;
+  margin-top: 20px;
+  border: 1px solid #303030;
+  border-radius: 9px;
+  background: linear-gradient(120deg, #111, #090909);
+  padding: 15px;
+  transition: border-color 180ms ease, transform 180ms ease;
+}
+
+.football-card:hover {
+  border-color: #515151;
+  transform: translateY(-2px);
+}
+
+.football-mark {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border: 1px solid #454545;
+  border-radius: 50%;
+  color: var(--bright-white);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.football-card div {
+  min-width: 0;
+}
+
+.football-card div p {
+  margin: 0 0 5px;
+  color: var(--gray-dim);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+}
+
+.football-card strong {
+  color: var(--white);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.football-code {
+  color: #505050;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 9px;
 }
 
 .interest-panel .skills {
@@ -1433,6 +1596,8 @@ a {
   .award-season summary { grid-template-columns: 1fr 42px; }
   .award-season-meta { grid-column: 1; grid-row: 2; flex-wrap: wrap; }
   .award-toggle { grid-column: 2; grid-row: 1; }
+  .deca-awards-grid { grid-template-columns: 1fr; }
+  .deca-award-card { min-height: 300px; }
   .about-grid { grid-template-columns: 1fr; }
   .profile-facts { grid-template-columns: repeat(2, 1fr); }
   .about-lower-grid { grid-template-columns: 1fr; }
@@ -1464,6 +1629,7 @@ a {
   .award-season-meta { gap: 10px 14px; }
   .award-season-meta span:nth-child(n+2) { display: none; }
   .award-competitions { grid-template-columns: 1fr; }
+  .award-category-spaced { margin-top: 82px; }
   .competition { padding: 21px 18px; }
   .recognition-grid { grid-template-columns: 1fr; }
   .recognition-feature,
@@ -1473,6 +1639,8 @@ a {
   .profile-facts > div { min-height: 108px; padding: 19px; }
   .profile-facts strong { margin-top: 20px; font-size: 14px; }
   .about-lower-grid { margin-top: 12px; }
+  .football-card { grid-template-columns: 42px 1fr; }
+  .football-code { display: none; }
   .course-grid { grid-template-columns: 1fr; }
   .course-card { min-height: 205px; padding: 24px 22px; }
   .course-detail { right: 22px; bottom: 22px; left: 22px; }

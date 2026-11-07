@@ -70,7 +70,7 @@ export default function OpenGraphImage() {
             color: '#737373',
           }}
         >
-          <div>SOFTWARE · APPLIED MATHEMATICS · QUANTITATIVE FINANCE</div>
+          <div>ECONOMICS · SOFTWARE · DATA ANALYSIS</div>
           <div>CLASS OF 2028 →</div>
         </div>
       </div>

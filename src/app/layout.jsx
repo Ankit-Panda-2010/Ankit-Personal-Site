@@ -13,7 +13,7 @@ export const metadata = {
     template: '%s | Ankit',
   },
   description:
-    'Ankit Panda is an IB Diploma student, developer, and Science Olympiad competitor exploring software engineering, applied mathematics, and quantitative finance.',
+    'Ankit Panda is an IB Diploma student and developer combining economics, software, and data analysis to build practical tools that solve real problems.',
   keywords: ['Ankit Panda', 'developer', 'software engineering', 'quantitative finance', 'Science Olympiad', 'IB student', 'Charlotte'],
   authors: [{ name: 'Ankit Panda' }],
   creator: 'Ankit Panda',
