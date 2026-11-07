@@ -88,34 +88,48 @@ const interests = [
 
 const coursework = [
   {
-    type: 'Academic program',
-    title: 'IB Diploma Programme',
-    detail: 'North Mecklenburg High School · In progress · Class of 2028',
+    track: 'AP',
+    title: 'AP Calculus AB',
   },
   {
-    type: 'Technical coursework',
-    title: 'Programming Basics',
-    detail: 'Completed technical certificate',
+    track: 'AP',
+    title: 'AP Computer Science Principles',
   },
   {
-    type: 'Technical coursework',
-    title: 'Python (Basic)',
-    detail: 'Completed technical certificate',
+    track: 'AP',
+    title: 'AP Statistics',
   },
   {
-    type: 'Technical coursework',
-    title: 'Java (Basic)',
-    detail: 'Completed technical certificate',
+    track: 'AP',
+    title: 'AP World History',
   },
   {
-    type: 'Technical coursework',
-    title: 'SQL (Basic)',
-    detail: 'Completed technical certificate',
+    track: 'IB',
+    title: 'IB Analysis and Approaches SL',
   },
   {
-    type: 'Professional certificate',
-    title: 'Software Engineer Intern Certificate',
-    detail: 'Completed professional certificate',
+    track: 'IB',
+    title: 'IB Business Management SL',
+  },
+  {
+    track: 'IB',
+    title: 'IB History of the Americas HL',
+  },
+  {
+    track: 'IB',
+    title: 'IB Language B: French SL',
+  },
+  {
+    track: 'IB',
+    title: 'IB Literature HL',
+  },
+  {
+    track: 'IB',
+    title: 'IB Physics HL',
+  },
+  {
+    track: 'IB',
+    title: 'IB Theory of Knowledge',
   },
 ]
 
@@ -601,17 +615,23 @@ export default function App() {
           <SectionHeading number="06" title="Coursework & learning" />
           <div className="courses-intro">
             <h3>What I’m studying.</h3>
-            <p>
-              My current academic programme and verified technical coursework. This section is structured so individual IB subjects can be added as the course list develops.
-            </p>
+            <div>
+              <p>
+                A rigorous mix of mathematics, computer science, business, history, languages, literature, and physics at North Mecklenburg High School.
+              </p>
+              <div className="course-counts">
+                <span><strong>04</strong> AP courses</span>
+                <span><strong>07</strong> IB courses</span>
+              </div>
+            </div>
           </div>
           <div className="course-grid">
             {coursework.map((course, index) => (
-              <article className={`course-card ${index === 0 ? 'course-card-featured' : ''}`} key={course.title} data-reveal>
+              <article className="course-card" key={course.title} data-reveal>
                 <span className="course-index">{String(index + 1).padStart(2, '0')}</span>
-                <p>{course.type}</p>
+                <p>{course.track} course</p>
                 <h3>{course.title}</h3>
-                <span className="course-detail">{course.detail}</span>
+                <span className="course-detail">North Mecklenburg High School</span>
               </article>
             ))}
           </div>

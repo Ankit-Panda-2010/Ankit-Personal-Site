@@ -1125,6 +1125,31 @@ a {
   line-height: 1.8;
 }
 
+.course-counts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin-top: 26px;
+}
+
+.course-counts span {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  color: var(--gray-dim);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: .09em;
+}
+
+.course-counts strong {
+  color: var(--white);
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: -.04em;
+}
+
 .course-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -1145,13 +1170,6 @@ a {
 
 .course-card:hover {
   background: var(--surface-raised);
-}
-
-.course-card-featured {
-  grid-column: span 2;
-  background:
-    radial-gradient(circle at 85% 15%, rgba(255,255,255,.08), transparent 28%),
-    var(--surface);
 }
 
 .course-card > p {
@@ -1333,7 +1351,6 @@ a {
   .profile-facts strong { margin-top: 20px; font-size: 14px; }
   .about-lower-grid { margin-top: 12px; }
   .course-grid { grid-template-columns: 1fr; }
-  .course-card-featured { grid-column: auto; }
   .course-card { min-height: 205px; padding: 24px 22px; }
   .course-detail { right: 22px; bottom: 22px; left: 22px; }
   .contact-inner { padding-block: 94px; }
