@@ -376,6 +376,13 @@ export default function App() {
     const shell = document.querySelector('.site-shell')
     const progress = document.querySelector('.scroll-progress')
     const revealItems = document.querySelectorAll('[data-reveal]')
+    const spotlightItems = document.querySelectorAll('[data-spotlight]')
+    const navLinks = Array.from(document.querySelectorAll('.desktop-nav a'))
+    const navSections = navLinks
+      .map((link) => document.querySelector(link.getAttribute('href')))
+      .filter(Boolean)
+    const heroPanel = document.querySelector('.hero-panel')
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
     const revealObserver = new IntersectionObserver(
       (entries) => {
@@ -389,7 +396,49 @@ export default function App() {
       { threshold: 0.08, rootMargin: '0px 0px -8% 0px' },
     )
 
-    revealItems.forEach((item) => revealObserver.observe(item))
+    revealItems.forEach((item, index) => {
+      item.style.setProperty('--reveal-order', index % 4)
+      revealObserver.observe(item)
+    })
+
+    const updateActiveNav = () => {
+      const marker = window.scrollY + window.innerHeight * 0.38
+      let activeSection = navSections[0]
+
+      navSections.forEach((section) => {
+        if (section.offsetTop <= marker) activeSection = section
+      })
+
+      navLinks.forEach((link) => {
+        const isActive = link.getAttribute('href') === `#${activeSection?.id}`
+        link.classList.toggle('is-active', isActive)
+        if (isActive) link.setAttribute('aria-current', 'location')
+        else link.removeAttribute('aria-current')
+      })
+    }
+
+    const handleSpotlightMove = (event) => {
+      const item = event.currentTarget
+      const bounds = item.getBoundingClientRect()
+      item.style.setProperty('--spotlight-x', `${event.clientX - bounds.left}px`)
+      item.style.setProperty('--spotlight-y', `${event.clientY - bounds.top}px`)
+    }
+
+    const handlePanelMove = (event) => {
+      if (prefersReducedMotion) return
+      const bounds = heroPanel.getBoundingClientRect()
+      const x = (event.clientX - bounds.left) / bounds.width - 0.5
+      const y = (event.clientY - bounds.top) / bounds.height - 0.5
+      heroPanel.style.setProperty('--panel-rotate-x', `${y * -3.5}deg`)
+      heroPanel.style.setProperty('--panel-rotate-y', `${x * 4.5}deg`)
+      heroPanel.style.setProperty('--panel-glow-x', `${(x + 0.5) * 100}%`)
+      heroPanel.style.setProperty('--panel-glow-y', `${(y + 0.5) * 100}%`)
+    }
+
+    const resetPanel = () => {
+      heroPanel?.style.setProperty('--panel-rotate-x', '0deg')
+      heroPanel?.style.setProperty('--panel-rotate-y', '0deg')
+    }
 
     const handlePointerMove = (event) => {
       shell?.style.setProperty('--pointer-x', `${event.clientX}px`)
@@ -400,16 +449,24 @@ export default function App() {
       const height = document.documentElement.scrollHeight - window.innerHeight
       const value = height > 0 ? window.scrollY / height : 0
       progress?.style.setProperty('--scroll-progress', value)
+      shell?.style.setProperty('--grid-shift', `${window.scrollY * -0.035}px`)
+      updateActiveNav()
     }
 
     window.addEventListener('pointermove', handlePointerMove, { passive: true })
     window.addEventListener('scroll', handleScroll, { passive: true })
+    spotlightItems.forEach((item) => item.addEventListener('pointermove', handleSpotlightMove, { passive: true }))
+    heroPanel?.addEventListener('pointermove', handlePanelMove, { passive: true })
+    heroPanel?.addEventListener('pointerleave', resetPanel)
     handleScroll()
 
     return () => {
       revealObserver.disconnect()
       window.removeEventListener('pointermove', handlePointerMove)
       window.removeEventListener('scroll', handleScroll)
+      spotlightItems.forEach((item) => item.removeEventListener('pointermove', handleSpotlightMove))
+      heroPanel?.removeEventListener('pointermove', handlePanelMove)
+      heroPanel?.removeEventListener('pointerleave', resetPanel)
       document.documentElement.classList.remove('motion-ready')
     }
   }, [])
@@ -474,29 +531,31 @@ export default function App() {
             </div>
           </div>
 
-          <div className="hero-panel hero-enter hero-enter-delay" aria-label="Current profile summary">
-            <div className="panel-chrome">
-              <span />
-              <span />
-              <span />
-              <p>ankit.json</p>
-            </div>
-            <div className="code-block">
-              <p><span className="syntax-muted">{'{'}</span></p>
-              <p className="code-line"><span className="syntax-key">"school"</span>: <span className="syntax-value">"North Mecklenburg HS"</span>,</p>
-              <p className="code-line"><span className="syntax-key">"program"</span>: <span className="syntax-value">"IB Diploma · Class of 2028"</span>,</p>
-              <p className="code-line"><span className="syntax-key">"building"</span>: <span className="syntax-value">"CivicLens"</span>,</p>
-              <p className="code-line"><span className="syntax-key">"interests"</span>: <span className="syntax-muted">[</span></p>
-              <p className="code-line code-indent"><span className="syntax-value">"software engineering"</span>,</p>
-              <p className="code-line code-indent"><span className="syntax-value">"quantitative finance"</span>,</p>
-              <p className="code-line code-indent"><span className="syntax-value">"applied mathematics"</span></p>
-              <p className="code-line"><span className="syntax-muted">]</span></p>
-              <p><span className="syntax-muted">{'}'}</span></p>
-            </div>
-            <div className="panel-footer">
-              <span>UTF-8</span>
-              <span>Next.js</span>
-              <span>Ln 01, Col 01</span>
+          <div className="hero-panel-wrap hero-enter hero-enter-delay">
+            <div className="hero-panel" aria-label="Current profile summary">
+              <div className="panel-chrome">
+                <span />
+                <span />
+                <span />
+                <p>ankit.json</p>
+              </div>
+              <div className="code-block">
+                <p><span className="syntax-muted">{'{'}</span></p>
+                <p className="code-line"><span className="syntax-key">"school"</span>: <span className="syntax-value">"North Mecklenburg HS"</span>,</p>
+                <p className="code-line"><span className="syntax-key">"program"</span>: <span className="syntax-value">"IB Diploma · Class of 2028"</span>,</p>
+                <p className="code-line"><span className="syntax-key">"building"</span>: <span className="syntax-value">"CivicLens"</span>,</p>
+                <p className="code-line"><span className="syntax-key">"interests"</span>: <span className="syntax-muted">[</span></p>
+                <p className="code-line code-indent"><span className="syntax-value">"software engineering"</span>,</p>
+                <p className="code-line code-indent"><span className="syntax-value">"quantitative finance"</span>,</p>
+                <p className="code-line code-indent"><span className="syntax-value">"applied mathematics"</span></p>
+                <p className="code-line"><span className="syntax-muted">]</span></p>
+                <p><span className="syntax-muted">{'}'}</span></p>
+              </div>
+              <div className="panel-footer">
+                <span>UTF-8</span>
+                <span>Next.js</span>
+                <span>Ln 01, Col 01</span>
+              </div>
             </div>
           </div>
 
@@ -526,10 +585,10 @@ export default function App() {
           </div>
 
           <div className="profile-facts" data-reveal>
-            <div><span>Age</span><strong>16</strong></div>
-            <div><span>Program</span><strong>IB Diploma</strong></div>
-            <div><span>Graduation</span><strong>2028</strong></div>
-            <div><span>Based in</span><strong><MapPin size={14} /> Charlotte, NC</strong></div>
+            <div data-spotlight><span>Age</span><strong>16</strong></div>
+            <div data-spotlight><span>Program</span><strong>IB Diploma</strong></div>
+            <div data-spotlight><span>Graduation</span><strong>2028</strong></div>
+            <div data-spotlight><span>Based in</span><strong><MapPin size={14} /> Charlotte, NC</strong></div>
           </div>
 
           <div className="about-lower-grid">
@@ -623,7 +682,7 @@ export default function App() {
         <section id="experience" className="section container" data-reveal>
           <SectionHeading number="03" title="Experience" />
           <div className="experience-grid">
-            <article className="experience-card" data-reveal>
+            <article className="experience-card" data-reveal data-spotlight>
               <div className="experience-icon"><BriefcaseBusiness size={18} strokeWidth={1.5} /></div>
               <p className="card-eyebrow">Professional</p>
               <h3>Web Development Intern</h3>
@@ -634,7 +693,7 @@ export default function App() {
               </p>
             </article>
 
-            <article className="experience-card" data-reveal>
+            <article className="experience-card" data-reveal data-spotlight>
               <div className="experience-icon"><Code2 size={18} strokeWidth={1.5} /></div>
               <p className="card-eyebrow">Technical team</p>
               <h3>Controls & Web Development</h3>
@@ -663,7 +722,7 @@ export default function App() {
           </div>
           <div className="course-grid">
             {coursework.map((course, index) => (
-              <article className="course-card" key={course.title} data-reveal>
+              <article className="course-card" key={course.title} data-reveal data-spotlight>
                 <span className="course-index">{String(index + 1).padStart(2, '0')}</span>
                 <p>{course.track} course</p>
                 <h3>{course.title}</h3>
@@ -762,7 +821,7 @@ export default function App() {
 
           <div className="deca-awards-grid">
             {decaAwards.map((item) => (
-              <article className="deca-award-card" key={item.title} data-reveal>
+              <article className="deca-award-card" key={item.title} data-reveal data-spotlight>
                 <div className="deca-result">{item.result}</div>
                 <div>
                   <p>{item.date} · DECA</p>
@@ -784,7 +843,7 @@ export default function App() {
 
           <div className="recognition-grid" data-reveal>
             {additionalRecognition.map((item, index) => (
-              <article className="recognition-feature" key={item.title}>
+              <article className="recognition-feature" key={item.title} data-spotlight>
                 <div className="recognition-icon">
                   {index === 0 ? <Trophy size={20} strokeWidth={1.4} /> : <Award size={20} strokeWidth={1.4} />}
                 </div>
@@ -794,7 +853,7 @@ export default function App() {
                 </div>
               </article>
             ))}
-            <article className="recognition-secondary">
+            <article className="recognition-secondary" data-spotlight>
               <div className="recognition-icon"><Award size={20} strokeWidth={1.4} /></div>
               <div>
                 <p>Technical certifications</p>
@@ -814,7 +873,7 @@ export default function App() {
           </div>
           <div className="language-grid">
             {languages.map((item) => (
-              <article className="language-card" key={item.language} data-reveal>
+              <article className="language-card" key={item.language} data-reveal data-spotlight>
                 <div className="language-card-top">
                   <span>{item.code}</span>
                   <div>
