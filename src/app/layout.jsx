@@ -9,35 +9,35 @@ const siteUrl =
 export const metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: 'Ankit — Personal Portfolio',
+    default: 'Ankit Panda — Developer & IB Student',
     template: '%s | Ankit',
   },
   description:
-    'Ankit’s personal portfolio — selected work, experience, ideas, and ways to connect.',
-  keywords: ['Ankit', 'portfolio', 'developer', 'designer', 'product builder'],
-  authors: [{ name: 'Ankit' }],
-  creator: 'Ankit',
+    'Ankit Panda is an IB Diploma student and developer exploring software engineering, applied mathematics, and quantitative finance.',
+  keywords: ['Ankit Panda', 'developer', 'software engineering', 'quantitative finance', 'IB student', 'Charlotte'],
+  authors: [{ name: 'Ankit Panda' }],
+  creator: 'Ankit Panda',
   openGraph: {
     type: 'website',
     url: '/',
-    title: 'Ankit — Personal Portfolio',
+    title: 'Ankit Panda — Developer & IB Student',
     description:
-      'Selected work, experience, ideas, and ways to connect with Ankit.',
-    siteName: 'Ankit — Personal Portfolio',
+      'Software engineering, applied mathematics, and quantitative finance.',
+    siteName: 'Ankit Panda',
     images: [
       {
         url: '/opengraph-image',
         width: 1200,
         height: 630,
-        alt: 'Ankit — curious builder and product-minded developer',
+        alt: 'Ankit Panda — developer and IB Diploma student',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Ankit — Personal Portfolio',
+    title: 'Ankit Panda — Developer & IB Student',
     description:
-      'Selected work, experience, ideas, and ways to connect with Ankit.',
+      'Software engineering, applied mathematics, and quantitative finance.',
     images: ['/opengraph-image'],
   },
   robots: {

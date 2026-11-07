@@ -1,6 +1,6 @@
 # Ankit — Personal Portfolio
 
-A modern, public personal portfolio built with Next.js and Tailwind CSS. It is ready to personalize with real experience, projects, links, and a portrait.
+A minimal, public personal portfolio for Ankit Panda, built with Next.js and Tailwind CSS.
 
 There is no authentication, database, or private user area. The site is statically exported and designed to be shared on LinkedIn, résumés, and job applications.
 
@@ -35,18 +35,13 @@ Vercel automatically provides the production URL for social and search metadata.
 
 Run `npm run build` and publish the generated `out/` directory.
 
-## Personalize
+## Content
 
 The editable content lives near the top of `src/App.jsx`:
 
-- `projects` — featured project cards
-- `experience` — career timeline
-- `capabilities` — skills and focus areas
+- `projects` — selected project and technical experience
+- `leadership` — current student leadership roles
+- `skills` — technologies and focus areas
 - About copy, contact email, LinkedIn, and GitHub links in the component markup
 
-Before sharing publicly, replace:
-
-- `hello@example.com`
-- Generic LinkedIn and GitHub links
-- Project and experience placeholders
-- Your final public URL if you are not deploying through Vercel
+The content currently reflects Ankit's supplied LinkedIn profile export. If deploying anywhere other than Vercel, set `NEXT_PUBLIC_SITE_URL` to the final public URL so shared links use the correct social metadata.
