@@ -77,6 +77,48 @@ const skills = [
   'Applied Mathematics',
 ]
 
+const interests = [
+  'Software Engineering',
+  'Quantitative Finance',
+  'Applied Mathematics',
+  'FinTech',
+  'Robotics & Autonomous Systems',
+  'STEM Education',
+]
+
+const coursework = [
+  {
+    type: 'Academic program',
+    title: 'IB Diploma Programme',
+    detail: 'North Mecklenburg High School · In progress · Class of 2028',
+  },
+  {
+    type: 'Technical coursework',
+    title: 'Programming Basics',
+    detail: 'Completed technical certificate',
+  },
+  {
+    type: 'Technical coursework',
+    title: 'Python (Basic)',
+    detail: 'Completed technical certificate',
+  },
+  {
+    type: 'Technical coursework',
+    title: 'Java (Basic)',
+    detail: 'Completed technical certificate',
+  },
+  {
+    type: 'Technical coursework',
+    title: 'SQL (Basic)',
+    detail: 'Completed technical certificate',
+  },
+  {
+    type: 'Professional certificate',
+    title: 'Software Engineer Intern Certificate',
+    detail: 'Completed professional certificate',
+  },
+]
+
 const scienceOlympiadAwards = [
   {
     season: '2021 / 22',
@@ -276,6 +318,7 @@ export default function App() {
             <a href="#work">Work</a>
             <a href="#experience">Experience</a>
             <a href="#awards">Awards</a>
+            <a href="#courses">Courses</a>
             <a href="#about">About</a>
           </nav>
 
@@ -347,7 +390,7 @@ export default function App() {
           <div className="hero-footnote">
             <span>Scroll to explore</span>
             <span className="hero-line" />
-            <span>01 — 06</span>
+            <span>01 — 07</span>
           </div>
         </section>
 
@@ -495,32 +538,89 @@ export default function App() {
           <div className="about-grid">
             <div className="about-statement">
               <p>
-                I’m an IB Diploma student interested in problems that reward both technical precision and analytical thinking.
+                I’m Ankit — a 16-year-old IB student, developer, and aspiring quant.
               </p>
             </div>
             <div className="about-details">
               <p>
-                My time is split between building software, exploring quantitative finance, and leading student organizations. I also care about expanding access to STEM through coaching, mentorship, and community outreach.
+                I’m most interested in the space where software, mathematics, and finance overlap. I spend my time building products, studying analytical problems, competing in STEM, and leading organizations at my school.
               </p>
-              <div className="detail-row">
-                <span>Education</span>
-                <p>North Mecklenburg High School<br />IB Diploma · 2024 — 2028</p>
-              </div>
-              <div className="detail-row">
-                <span>Location</span>
-                <p className="with-icon"><MapPin size={14} /> Charlotte, NC</p>
+              <p>
+                Beyond my own projects, I care about making STEM more accessible through coaching, mentorship, community outreach, and helping other students get excited about technical subjects.
+              </p>
+            </div>
+          </div>
+
+          <div className="profile-facts" data-reveal>
+            <div><span>Age</span><strong>16</strong></div>
+            <div><span>Program</span><strong>IB Diploma</strong></div>
+            <div><span>Graduation</span><strong>2028</strong></div>
+            <div><span>Based in</span><strong><MapPin size={14} /> Charlotte, NC</strong></div>
+          </div>
+
+          <div className="about-lower-grid">
+            <div className="interest-panel" data-reveal>
+              <p className="panel-label">What I’m interested in</p>
+              <div className="interest-list">
+                {interests.map((interest, index) => (
+                  <div key={interest}>
+                    <span>0{index + 1}</span>
+                    <p>{interest}</p>
+                  </div>
+                ))}
               </div>
               <div className="skills">
                 {skills.map((skill) => <span key={skill}>{skill}</span>)}
               </div>
             </div>
+
+            <div className="online-panel" data-reveal>
+              <p className="panel-label">Find me online</p>
+              <div className="online-links">
+                <a href="https://github.com/Ankit-Panda-2010" target="_blank" rel="noreferrer">
+                  <span className="online-icon"><Code2 size={18} strokeWidth={1.5} /></span>
+                  <span><strong>GitHub</strong><small>@Ankit-Panda-2010</small></span>
+                  <ArrowUpRight size={17} strokeWidth={1.4} />
+                </a>
+                <a href="https://www.linkedin.com/in/ankit-panda-195ab22a7" target="_blank" rel="noreferrer">
+                  <span className="online-icon"><BriefcaseBusiness size={18} strokeWidth={1.5} /></span>
+                  <span><strong>LinkedIn</strong><small>Professional profile</small></span>
+                  <ArrowUpRight size={17} strokeWidth={1.4} />
+                </a>
+                <a href="mailto:ankitpanda2010@gmail.com">
+                  <span className="online-icon"><Mail size={18} strokeWidth={1.5} /></span>
+                  <span><strong>Email</strong><small>ankitpanda2010@gmail.com</small></span>
+                  <ArrowUpRight size={17} strokeWidth={1.4} />
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="courses" className="section container courses-section" data-reveal>
+          <SectionHeading number="06" title="Coursework & learning" />
+          <div className="courses-intro">
+            <h3>What I’m studying.</h3>
+            <p>
+              My current academic programme and verified technical coursework. This section is structured so individual IB subjects can be added as the course list develops.
+            </p>
+          </div>
+          <div className="course-grid">
+            {coursework.map((course, index) => (
+              <article className={`course-card ${index === 0 ? 'course-card-featured' : ''}`} key={course.title} data-reveal>
+                <span className="course-index">{String(index + 1).padStart(2, '0')}</span>
+                <p>{course.type}</p>
+                <h3>{course.title}</h3>
+                <span className="course-detail">{course.detail}</span>
+              </article>
+            ))}
           </div>
         </section>
 
         <section id="contact" className="contact-section">
           <div className="contact-glow" aria-hidden="true" />
           <div className="container contact-inner" data-reveal>
-            <p className="kicker">06 · Contact</p>
+            <p className="kicker">07 · Contact</p>
             <h2>Let’s connect.</h2>
             <p className="contact-copy">
               I’m always interested in thoughtful conversations about software, quantitative finance, STEM, and new opportunities.
