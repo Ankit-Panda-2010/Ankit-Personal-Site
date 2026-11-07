@@ -41,6 +41,16 @@ const projects = [
       'Helped a competitive robotics team develop its scouting platform using a modern full-stack web stack.',
     stack: ['Next.js', 'Tailwind CSS', 'PostgreSQL'],
   },
+  {
+    index: '04',
+    title: 'Personal Website',
+    role: 'Design & Development',
+    period: '2025 — Present',
+    description:
+      'Designed and built this personal portfolio to present my projects, experience, coursework, leadership, awards, and interests in one place.',
+    stack: ['Next.js', 'Tailwind CSS', 'Vercel'],
+    href: 'https://ankit-personal-site.vercel.app',
+  },
 ]
 
 const leadership = [
@@ -489,7 +499,19 @@ export default function App() {
                 <div className="project-main" data-reveal>
                   <div className="project-title-row">
                     <h3>{project.title}</h3>
-                    <ArrowUpRight className="project-arrow" size={25} strokeWidth={1.4} />
+                    {project.href ? (
+                      <a
+                        className="project-arrow-link"
+                        href={project.href}
+                        target="_blank"
+                        rel="noreferrer"
+                        aria-label={`Open ${project.title}`}
+                      >
+                        <ArrowUpRight className="project-arrow" size={25} strokeWidth={1.4} />
+                      </a>
+                    ) : (
+                      <ArrowUpRight className="project-arrow" size={25} strokeWidth={1.4} />
+                    )}
                   </div>
                   <p className="project-role">{project.role}</p>
                   <p className="project-description">{project.description}</p>
