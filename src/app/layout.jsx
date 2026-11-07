@@ -13,8 +13,8 @@ export const metadata = {
     template: '%s | Ankit',
   },
   description:
-    'Ankit Panda is an IB Diploma student and developer exploring software engineering, applied mathematics, and quantitative finance.',
-  keywords: ['Ankit Panda', 'developer', 'software engineering', 'quantitative finance', 'IB student', 'Charlotte'],
+    'Ankit Panda is an IB Diploma student, developer, and Science Olympiad competitor exploring software engineering, applied mathematics, and quantitative finance.',
+  keywords: ['Ankit Panda', 'developer', 'software engineering', 'quantitative finance', 'Science Olympiad', 'IB student', 'Charlotte'],
   authors: [{ name: 'Ankit Panda' }],
   creator: 'Ankit Panda',
   openGraph: {

@@ -1,10 +1,16 @@
+"use client"
+
+import { useEffect } from 'react'
 import {
   ArrowDown,
   ArrowUpRight,
+  Award,
   BriefcaseBusiness,
+  ChevronDown,
   Code2,
   Mail,
   MapPin,
+  Trophy,
 } from 'lucide-react'
 
 const projects = [
@@ -71,9 +77,192 @@ const skills = [
   'Applied Mathematics',
 ]
 
+const scienceOlympiadAwards = [
+  {
+    season: '2021 / 22',
+    issued: 'January 2022',
+    competitions: [
+      {
+        name: 'Chattahoochee',
+        placements: [['Meteorology', '1st']],
+      },
+      {
+        name: 'Regionals',
+        placements: [
+          ['Meteorology', '1st'],
+          ['Dynamic Planet', '1st'],
+          ['Rocks and Minerals', '1st'],
+          ['Bio Process Lab', '3rd'],
+          ['Fast Facts', '1st'],
+        ],
+      },
+      {
+        name: 'States',
+        placements: [
+          ['Rocks and Minerals', '1st'],
+          ['Dynamic Planet', '8th'],
+        ],
+      },
+    ],
+  },
+  {
+    season: '2022 / 23',
+    competitions: [
+      {
+        name: 'University of Pittsburg',
+        placements: [['Dynamic Planet', '2nd']],
+      },
+      {
+        name: 'Mentor',
+        placements: [
+          ['Dynamic Planet', '2nd'],
+          ['Rocks and Minerals', '6th'],
+          ['Meteorology', '7th'],
+        ],
+      },
+      {
+        name: 'Regionals',
+        placements: [
+          ['Crave the Wave', '4th'],
+          ['Dynamic Planet', '1st'],
+        ],
+      },
+      {
+        name: 'States',
+        placements: [
+          ['Meteorology', '2nd'],
+          ['Crave the Wave', '2nd'],
+          ['Dynamic Planet', '7th'],
+        ],
+      },
+    ],
+  },
+  {
+    season: '2023 / 24',
+    competitions: [
+      {
+        name: 'NC State Invitational',
+        placements: [
+          ['Optics', '3rd'],
+          ['Wind Power', '3rd'],
+        ],
+      },
+      {
+        name: 'Solon',
+        placements: [['Optics', '8th']],
+      },
+      {
+        name: 'Regionals',
+        placements: [
+          ['Optics', '3rd'],
+          ['Wind Power', '3rd'],
+          ['Air Trajectory', '3rd'],
+        ],
+      },
+      {
+        name: 'States',
+        placements: [
+          ['Optics', '2nd'],
+          ['Wind Power', '9th'],
+          ['Microbe Mission', '3rd'],
+        ],
+      },
+    ],
+  },
+  {
+    season: '2024 / 25',
+    competitions: [
+      {
+        name: 'Dodgen',
+        placements: [
+          ['Optics', '6th'],
+          ['Experimental Design', '2nd'],
+        ],
+      },
+      {
+        name: 'NC State',
+        placements: [
+          ['Experimental Design', '1st'],
+          ['Optics', '2nd'],
+          ['Ecology', '4th'],
+        ],
+      },
+      {
+        name: 'CrabSO',
+        placements: [
+          ['Experimental Design', '2nd'],
+          ['Ecology', '4th'],
+        ],
+      },
+      {
+        name: 'States',
+        placements: [
+          ['Wind Power', '1st'],
+          ['Optics', '6th'],
+          ['Ecology', '3rd'],
+          ['Experimental Design', '8th'],
+        ],
+      },
+    ],
+  },
+]
+
+const totalPlacements = scienceOlympiadAwards.reduce(
+  (total, season) => total + season.competitions.reduce(
+    (seasonTotal, competition) => seasonTotal + competition.placements.length,
+    0,
+  ),
+  0,
+)
+
 export default function App() {
+  useEffect(() => {
+    document.documentElement.classList.add('motion-ready')
+    const shell = document.querySelector('.site-shell')
+    const progress = document.querySelector('.scroll-progress')
+    const revealItems = document.querySelectorAll('[data-reveal]')
+
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible')
+            revealObserver.unobserve(entry.target)
+          }
+        })
+      },
+      { threshold: 0.08, rootMargin: '0px 0px -8% 0px' },
+    )
+
+    revealItems.forEach((item) => revealObserver.observe(item))
+
+    const handlePointerMove = (event) => {
+      shell?.style.setProperty('--pointer-x', `${event.clientX}px`)
+      shell?.style.setProperty('--pointer-y', `${event.clientY}px`)
+    }
+
+    const handleScroll = () => {
+      const height = document.documentElement.scrollHeight - window.innerHeight
+      const value = height > 0 ? window.scrollY / height : 0
+      progress?.style.setProperty('--scroll-progress', value)
+    }
+
+    window.addEventListener('pointermove', handlePointerMove, { passive: true })
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    handleScroll()
+
+    return () => {
+      revealObserver.disconnect()
+      window.removeEventListener('pointermove', handlePointerMove)
+      window.removeEventListener('scroll', handleScroll)
+      document.documentElement.classList.remove('motion-ready')
+    }
+  }, [])
+
   return (
     <div className="site-shell">
+      <div className="scroll-progress" aria-hidden="true" />
+      <div className="pointer-glow" aria-hidden="true" />
       <div className="ambient-grid" aria-hidden="true" />
 
       <header className="site-header">
@@ -86,6 +275,7 @@ export default function App() {
           <nav className="desktop-nav" aria-label="Primary navigation">
             <a href="#work">Work</a>
             <a href="#experience">Experience</a>
+            <a href="#awards">Awards</a>
             <a href="#about">About</a>
           </nav>
 
@@ -97,7 +287,7 @@ export default function App() {
 
       <main>
         <section id="top" className="hero container">
-          <div className="hero-copy">
+          <div className="hero-copy hero-enter">
             <div className="availability">
               <span className="availability-dot" />
               Charlotte, North Carolina
@@ -128,7 +318,7 @@ export default function App() {
             </div>
           </div>
 
-          <div className="hero-panel" aria-label="Current profile summary">
+          <div className="hero-panel hero-enter hero-enter-delay" aria-label="Current profile summary">
             <div className="panel-chrome">
               <span />
               <span />
@@ -157,17 +347,17 @@ export default function App() {
           <div className="hero-footnote">
             <span>Scroll to explore</span>
             <span className="hero-line" />
-            <span>01 — 05</span>
+            <span>01 — 06</span>
           </div>
         </section>
 
-        <section id="work" className="section container">
+        <section id="work" className="section container" data-reveal>
           <SectionHeading number="01" title="Selected work" />
           <div className="project-list">
             {projects.map((project) => (
               <article className="project-row" key={project.title}>
                 <span className="project-index">{project.index}</span>
-                <div className="project-main">
+                <div className="project-main" data-reveal>
                   <div className="project-title-row">
                     <h3>{project.title}</h3>
                     <ArrowUpRight className="project-arrow" size={25} strokeWidth={1.4} />
@@ -184,10 +374,10 @@ export default function App() {
           </div>
         </section>
 
-        <section id="experience" className="section container">
+        <section id="experience" className="section container" data-reveal>
           <SectionHeading number="02" title="Experience" />
           <div className="experience-grid">
-            <article className="experience-card">
+            <article className="experience-card" data-reveal>
               <div className="experience-icon"><BriefcaseBusiness size={18} strokeWidth={1.5} /></div>
               <p className="card-eyebrow">Professional</p>
               <h3>Web Development Intern</h3>
@@ -198,7 +388,7 @@ export default function App() {
               </p>
             </article>
 
-            <article className="experience-card">
+            <article className="experience-card" data-reveal>
               <div className="experience-icon"><Code2 size={18} strokeWidth={1.5} /></div>
               <p className="card-eyebrow">Technical team</p>
               <h3>Controls & Web Development</h3>
@@ -211,11 +401,11 @@ export default function App() {
           </div>
         </section>
 
-        <section className="section container" aria-labelledby="leadership-heading">
+        <section className="section container" aria-labelledby="leadership-heading" data-reveal>
           <SectionHeading number="03" title="Leadership" id="leadership-heading" />
           <div className="leadership-list">
             {leadership.map((item, index) => (
-              <article className="leadership-row" key={item.organization}>
+              <article className="leadership-row" key={item.organization} data-reveal>
                 <span className="leadership-number">0{index + 1}</span>
                 <div>
                   <h3>{item.organization}</h3>
@@ -227,8 +417,81 @@ export default function App() {
           </div>
         </section>
 
-        <section id="about" className="section container">
-          <SectionHeading number="04" title="About" />
+        <section id="awards" className="section container awards-section" data-reveal>
+          <SectionHeading number="04" title="Awards" />
+
+          <div className="awards-intro">
+            <div className="awards-total">
+              <span>{totalPlacements}</span>
+              <p>placements across<br />four Science Olympiad seasons</p>
+            </div>
+            <p className="awards-summary">
+              Four years of competition across earth science, physics, biology, engineering, and experimental design — from invitationals through state tournaments.
+            </p>
+          </div>
+
+          <div className="award-seasons">
+            {scienceOlympiadAwards.map((season, index) => {
+              const seasonTotal = season.competitions.reduce(
+                (total, competition) => total + competition.placements.length,
+                0,
+              )
+
+              return (
+                <details className="award-season" key={season.season} open={index === scienceOlympiadAwards.length - 1} data-reveal>
+                  <summary>
+                    <div className="award-season-title">
+                      <span>Season</span>
+                      <h3>{season.season}</h3>
+                    </div>
+                    <div className="award-season-meta">
+                      <span>{seasonTotal} placements</span>
+                      <span>Science Olympiad, Inc.</span>
+                      {season.issued && <span>Issued {season.issued}</span>}
+                    </div>
+                    <span className="award-toggle"><ChevronDown size={17} /></span>
+                  </summary>
+
+                  <div className="award-competitions">
+                    {season.competitions.map((competition) => (
+                      <div className="competition" key={competition.name}>
+                        <p>{competition.name}</p>
+                        <div className="placement-list">
+                          {competition.placements.map(([event, place]) => (
+                            <div className="placement" key={`${competition.name}-${event}`}>
+                              <span>{event}</span>
+                              <strong className={`place place-${place.replace(/\D/g, '')}`}>{place}</strong>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </details>
+              )
+            })}
+          </div>
+
+          <div className="recognition-grid" data-reveal>
+            <article className="recognition-feature">
+              <div className="recognition-icon"><Trophy size={20} strokeWidth={1.4} /></div>
+              <div>
+                <p>Additional recognition</p>
+                <h3>Presidential Award for Educational Achievement</h3>
+              </div>
+            </article>
+            <article className="recognition-secondary">
+              <div className="recognition-icon"><Award size={20} strokeWidth={1.4} /></div>
+              <div>
+                <p>Technical certifications</p>
+                <h3>SQL (Basic) · Python (Basic) · Java (Basic) · Software Engineer Intern Certificate · Programming Basics</h3>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section id="about" className="section container" data-reveal>
+          <SectionHeading number="05" title="About" />
           <div className="about-grid">
             <div className="about-statement">
               <p>
@@ -256,8 +519,8 @@ export default function App() {
 
         <section id="contact" className="contact-section">
           <div className="contact-glow" aria-hidden="true" />
-          <div className="container contact-inner">
-            <p className="kicker">05 · Contact</p>
+          <div className="container contact-inner" data-reveal>
+            <p className="kicker">06 · Contact</p>
             <h2>Let’s connect.</h2>
             <p className="contact-copy">
               I’m always interested in thoughtful conversations about software, quantitative finance, STEM, and new opportunities.
