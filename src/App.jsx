@@ -16,6 +16,27 @@ import {
 const projects = [
   {
     index: '01',
+    title: 'DECA Test Parser and Taker',
+    role: 'Interactive exam preparation tool',
+    period: '2026',
+    description:
+      'Built a platform that transforms uploaded DECA practice-test PDFs into interactive quizzes with grading, feedback, explanations, analytics, and progress tracking.',
+    stack: ['JavaScript', 'Tailwind CSS', 'PDF Parsing', 'Analytics'],
+    href: 'https://deca-test-taker-seven.vercel.app',
+  },
+  {
+    index: '02',
+    title: 'Teen Money Hub',
+    role: 'Student personal finance application',
+    period: 'January 2026 — May 2026',
+    description:
+      'Built a simple, approachable money-management application designed specifically for high school students.',
+    stack: ['JavaScript', 'Tailwind CSS', 'Personal Finance'],
+    association: 'North Mecklenburg High School',
+    href: 'https://teen-money-hub.vercel.app',
+  },
+  {
+    index: '03',
     title: 'CivicLens',
     role: 'Co-Founder & Developer',
     period: '2026 — Present',
@@ -24,16 +45,27 @@ const projects = [
     stack: ['Product', 'Development', 'Civic Tech'],
   },
   {
-    index: '02',
+    index: '04',
     title: 'CORA',
     role: 'Cosmic Observation Research Archive',
-    period: 'October 2025',
+    period: 'October 2025 — Present',
     description:
       'Built an application that filters publications for useful information for researchers, students, professors, and subject-matter experts.',
-    stack: ['Research Tool', 'Publication Filtering', 'Information Access'],
+    stack: ['Project Management', 'Web Development', 'Research Tool'],
+    contributors: 'Atharv and Anirvin',
   },
   {
-    index: '03',
+    index: '05',
+    title: 'Personal Website',
+    role: 'Design & Development',
+    period: '2025 — Present',
+    description:
+      'Designed and built this personal portfolio to present my projects, experience, coursework, leadership, awards, and interests in one place.',
+    stack: ['Next.js', 'Tailwind CSS', 'Vercel'],
+    href: 'https://ankit-personal-site.vercel.app',
+  },
+  {
+    index: '06',
     title: 'FRC Scouting Platform',
     role: 'Developer · YETI Robotics 3506',
     period: '2024 — 2026',
@@ -42,14 +74,15 @@ const projects = [
     stack: ['Next.js', 'Tailwind CSS', 'PostgreSQL'],
   },
   {
-    index: '04',
-    title: 'Personal Website',
-    role: 'Design & Development',
-    period: '2025 — Present',
+    index: '07',
+    title: '8th Grade IB Community Service Project',
+    role: 'IB Community Service Project',
+    period: 'September 2023 — February 2024',
     description:
-      'Designed and built this personal portfolio to present my projects, experience, coursework, leadership, awards, and interests in one place.',
-    stack: ['Next.js', 'Tailwind CSS', 'Vercel'],
-    href: 'https://ankit-personal-site.vercel.app',
+      'Completed an eighth-grade community service project demonstrating communication, critical thinking, planning, and organization.',
+    stack: ['Communication', 'Critical Thinking', 'Planning', 'Organization'],
+    contributors: 'Manju Bhargav',
+    association: 'Piedmont Open IB Middle School',
   },
 ]
 
@@ -515,6 +548,12 @@ export default function App() {
                   </div>
                   <p className="project-role">{project.role}</p>
                   <p className="project-description">{project.description}</p>
+                  {(project.contributors || project.association) && (
+                    <div className="project-context">
+                      {project.contributors && <span>Contributors · {project.contributors}</span>}
+                      {project.association && <span>Associated with · {project.association}</span>}
+                    </div>
+                  )}
                   <div className="tag-list">
                     {project.stack.map((item) => <span key={item}>{item}</span>)}
                   </div>

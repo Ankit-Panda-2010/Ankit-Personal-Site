@@ -511,6 +511,22 @@ a {
   line-height: 1.75;
 }
 
+.project-context {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  margin-top: 17px;
+}
+
+.project-context span {
+  color: var(--gray-dim);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 9px;
+  line-height: 1.55;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+}
+
 .tag-list {
   display: flex;
   flex-wrap: wrap;
